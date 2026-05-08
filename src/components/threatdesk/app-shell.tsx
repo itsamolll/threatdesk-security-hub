@@ -89,7 +89,7 @@ export function AppShell({
             <span className="hidden text-sm text-muted-foreground sm:inline">
               {userName}
             </span>
-            <UserButton afterSignOutUrl="/" />
+            <UserButton />
           </div>
         </header>
         <main className="flex-1">{children}</main>
