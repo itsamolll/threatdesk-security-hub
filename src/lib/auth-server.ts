@@ -28,13 +28,13 @@ export async function requireUser(): Promise<AppUser> {
   const { data: existing } = await supabaseAdmin
     .from("users")
     .select("id, clerk_user_id, name, email, role")
-    .eq("clerk_user_id", auth.userId)
+    .eq("clerk_user_id", userId)
     .maybeSingle();
 
   if (existing) return existing as AppUser;
 
   // First-time provisioning — fetch profile from Clerk.
-  const profile = await clerk.users.getUser(auth.userId);
+  const profile = await clerkClient().users.getUser(userId);
   const email =
     profile.primaryEmailAddress?.emailAddress ??
     profile.emailAddresses[0]?.emailAddress ??
@@ -52,7 +52,7 @@ export async function requireUser(): Promise<AppUser> {
 
   const { data: inserted, error } = await supabaseAdmin
     .from("users")
-    .insert({ clerk_user_id: auth.userId, name, email, role })
+    .insert({ clerk_user_id: userId, name, email, role })
     .select("id, clerk_user_id, name, email, role")
     .single();
 
