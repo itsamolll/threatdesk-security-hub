@@ -1,7 +1,5 @@
 // Server-only Clerk + Supabase helpers. Never import from client code.
-import { getAuth } from "@clerk/tanstack-react-start/server";
-import { createClerkClient } from "@clerk/backend";
-import { getRequest } from "@tanstack/react-start/server";
+import { auth, clerkClient } from "@clerk/tanstack-react-start/server";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
 
 export type AppUser = {
@@ -12,11 +10,6 @@ export type AppUser = {
   role: "admin" | "member";
 };
 
-const clerk = createClerkClient({
-  secretKey: process.env.CLERK_SECRET_KEY,
-  publishableKey: process.env.CLERK_PUBLISHABLE_KEY,
-});
-
 /**
  * Resolve the current authenticated user, syncing them into the `users` table
  * on first visit. The very first user to sign in becomes the admin
@@ -25,11 +18,11 @@ const clerk = createClerkClient({
  * Throws a 401 Response if the request is not authenticated.
  */
 export async function requireUser(): Promise<AppUser> {
-  const request = getRequest();
-  const auth = await getAuth(request);
-  if (!auth.userId) {
+  const session = await auth();
+  if (!session.userId) {
     throw new Response("Unauthorized", { status: 401 });
   }
+  const userId = session.userId;
 
   // Already synced?
   const { data: existing } = await supabaseAdmin
