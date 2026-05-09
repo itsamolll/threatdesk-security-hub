@@ -45,16 +45,17 @@ function Header() {
         </Link>
         <nav className="flex items-center gap-2">
           <Link
-            to="/login"
-            className="rounded-md px-4 py-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+            to="/signup"
+            className="rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
           >
-            Login
+            Sign up
           </Link>
           <Link
-            to="/signup"
+            to="/login"
+            search={{ role: "admin" }}
             className="td-glow inline-flex items-center gap-1 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
           >
-            Get Started <ArrowRight className="h-4 w-4" />
+            Login <ArrowRight className="h-4 w-4" />
           </Link>
         </nav>
       </div>
@@ -82,18 +83,29 @@ function Hero() {
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
-              to="/signup"
+              to="/login"
+              search={{ role: "admin" }}
               className="td-glow inline-flex items-center gap-2 rounded-md bg-primary px-5 py-3 font-medium text-primary-foreground hover:opacity-90"
             >
-              Start free <ArrowRight className="h-4 w-4" />
+              <ShieldCheck className="h-4 w-4" /> Login as Admin
             </Link>
             <Link
               to="/login"
+              search={{ role: "member" }}
               className="inline-flex items-center gap-2 rounded-md border border-border bg-card px-5 py-3 font-medium text-foreground hover:bg-accent"
             >
-              Log in
+              <Activity className="h-4 w-4" /> Login as Member
+            </Link>
+            <Link
+              to="/signup"
+              className="inline-flex items-center gap-2 rounded-md px-3 py-3 text-sm text-muted-foreground hover:text-foreground"
+            >
+              or create an account →
             </Link>
           </div>
+          <p className="mt-3 font-mono text-[11px] text-muted-foreground">
+            First account becomes the Security Lead (Admin). All others join as Analysts.
+          </p>
           <div className="mt-8 flex items-center gap-6 font-mono text-xs text-muted-foreground">
             <span>NETWORK · FIREWALL · DNS · VPN</span>
           </div>
