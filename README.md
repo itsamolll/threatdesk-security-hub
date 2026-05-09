@@ -31,9 +31,8 @@ Admin Features
 * Track deadlines and priorities
 * Manage ongoing investigations
 
-⸻
 
-📊 Dashboard & Analytics
+Dashboard & Analytics
 
 * Total tasks overview
 * Critical issue tracking
@@ -42,7 +41,7 @@ Admin Features
 * Severity-based monitoring
 * Team activity tracking
 
-Tech Stack
+## Tech Stack
 
 Frontend
 
