@@ -6,10 +6,10 @@
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
-    "build:railway": "vite build",
+    "build:railway": "RAILWAY_DEPLOYMENT=1 vite build",
     "build:dev": "vite build --mode development",
-    "preview": "vite preview --host 0.0.0.0",
-    "start": "sh -c 'vite preview --host 0.0.0.0 --port ${PORT:-4173}'",
+    "preview": "vite preview",
+    "start": "node .output/server/index.mjs",
     "lint": "eslint .",
     "format": "prettier --write ."
   },
