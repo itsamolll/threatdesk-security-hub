@@ -6,10 +6,10 @@
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
-    "build:railway": "RAILWAY_DEPLOYMENT=1 vite build",
+    "build:railway": "RAILWAY_DEPLOYMENT=1 vite build && vite build --config vite.node-server.config.ts",
     "build:dev": "vite build --mode development",
     "preview": "vite preview",
-    "start": "node .output/server/index.mjs",
+    "start": "node dist/server/node-server.js",
     "lint": "eslint .",
     "format": "prettier --write ."
   },
