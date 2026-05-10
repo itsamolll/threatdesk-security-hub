@@ -4,6 +4,10 @@
 import { createServerFn } from "@tanstack/react-start";
 
 export const getClerkConfig = createServerFn({ method: "GET" }).handler(async () => {
-  const publishableKey = process.env.CLERK_PUBLISHABLE_KEY ?? "";
+  const publishableKey =
+    process.env.CLERK_PUBLISHABLE_KEY ??
+    process.env.VITE_CLERK_PUBLISHABLE_KEY ??
+    process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY ??
+    "";
   return { publishableKey };
 });
