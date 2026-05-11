@@ -137,7 +137,10 @@ function PublicRouter({ route, navigate, clerkEnabled }: { route: Route; navigat
 
 function AppRouter({ route, navigate, clerkEnabled }: { route: Route; navigate: (path: string) => void; clerkEnabled: boolean }) {
   const { role, setRole, me } = useThreatDesk();
-  const userName = clerkEnabled ? <ClerkDisplayName fallback={me.name} /> : me.name;
+  const { user } = useUser();
+  const userName = clerkEnabled
+    ? user?.fullName || user?.primaryEmailAddress?.emailAddress || me.name
+    : me.name;
 
   useEffect(() => {
     const roleParam = route.search.get("role");
@@ -157,22 +160,15 @@ function AppRouter({ route, navigate, clerkEnabled }: { route: Route; navigate: 
   return (
     <AppShell
       role={role}
-      userName={typeof userName === "string" ? userName : me.name}
+      userName={userName}
       pathname={route.path}
       navigate={navigate}
       logout={() => navigate("/")}
       clerkEnabled={clerkEnabled}
     >
-      {userName}
       <PrivatePage path={route.path} navigate={navigate} role={role} />
     </AppShell>
   );
-}
-
-function ClerkDisplayName({ fallback }: { fallback: string }) {
-  const { user } = useUser();
-  const name = user?.fullName || user?.primaryEmailAddress?.emailAddress || fallback;
-  return <span className="sr-only">{name}</span>;
 }
 
 function isPrivatePath(path: string) {
