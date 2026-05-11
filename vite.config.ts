@@ -1,12 +1,14 @@
-import { defineConfig } from "@lovable.dev/vite-tanstack-config";
-
-const isRailwayBuild =
-  process.env.RAILWAY_DEPLOYMENT === "1" ||
-  Boolean(process.env.RAILWAY_ENVIRONMENT || process.env.RAILWAY_PROJECT_ID);
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import tailwindcss from "@tailwindcss/vite";
+import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
-  cloudflare: isRailwayBuild ? false : undefined,
-  tanstackStart: {
-    server: { entry: "server" },
+  plugins: [react(), tailwindcss(), tsconfigPaths()],
+  server: {
+    host: "0.0.0.0",
+  },
+  preview: {
+    host: "0.0.0.0",
   },
 });
