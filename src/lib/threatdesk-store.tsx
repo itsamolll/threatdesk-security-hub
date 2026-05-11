@@ -62,10 +62,10 @@ type StoreState = {
   me: User;
   users: User[];
   projects: Project[];
-  tasks: Task[];
+  tasks: EnrichedTask[];
   notes: Note[];
   activity: ActivityLog[];
-  visibleTasks: Task[];
+  visibleTasks: EnrichedTask[];
   createProject: (project: Pick<Project, "name" | "description">) => void;
   createTask: (task: CreateTaskInput) => void;
   deleteTask: (id: string) => void;
