@@ -1,63 +1,24 @@
 # ThreatDesk
 
-ThreatDesk is a full-stack cybersecurity task management platform designed for internal security teams to manage vulnerabilities, assign investigation tasks, and track security operations through a centralized dashboard.
+ThreatDesk is a Railway-compatible Vite + React + TypeScript security workflow app for internal cyber teams.
 
-The project focuses mainly on networking-related security workflows such as firewall audits, open port analysis, suspicious login investigations, and internal network reviews.
+## Railway deployment
 
-Built as a modern security operations workspace with role-based access for Admins and Members.
+Use these commands exactly:
+
+```bash
+npm install && npm run build
+npm run preview -- --host 0.0.0.0 --port $PORT
+```
+
+The app is a plain Vite SPA. It does not depend on TanStack Start SSR, Cloudflare Workers, Edge runtimes, `.output/server/index.mjs`, or `dist/server/server.js`.
 
 ## Features
 
-Authentication
-
-* Secure login/signup system using Clerk
-* Role-based access control
-* Separate Admin and Member dashboards
-
-Admin Features
-
-* Create and manage projects
-* Assign security tasks to team members
-* Set severity, priority, and deadlines
-* Monitor task progress
-* View analytics and recent activity
-* Track active and overdue vulnerabilities
-
-  Member Features
-
-* View assigned tasks
-* Update task status
-* Add investigation notes/findings
-* Track deadlines and priorities
-* Manage ongoing investigations
-
-
-Dashboard & Analytics
-
-* Total tasks overview
-* Critical issue tracking
-* Resolved vulnerabilities
-* In-progress investigations
-* Severity-based monitoring
-* Team activity tracking
-
-## Tech Stack
-
-Frontend
-
-* React
-* TypeScript
-* Tailwind CSS
-
-Backend
-
-* REST APIs
-* SQL Database
-
-Authentication
-
-* Clerk Authentication
-
-Deployment
-
-* Railway
+- Landing, login, signup, admin, and member flows
+- Admin dashboard, projects, tasks, team, analytics, and settings
+- Member dashboard, assigned tasks, task details, notes, and status updates
+- Functional task create/delete/update/reassign actions
+- Local persistent demo state for stable production assessment if no backend is configured
+- Clerk React auth when `VITE_CLERK_PUBLISHABLE_KEY` is available; safe demo login fallback otherwise
+- SPA fallback via `public/_redirects` for refresh/deep links
